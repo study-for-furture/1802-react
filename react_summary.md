@@ -1,29 +1,3 @@
-
-Active File in StatusBar
-Auto Close Tag
-Auto Rename Tag
-Close HTML/XML tag
-Color Picker
-Debugger for Chrome
-Guides
-Hasher
-HTML Snippets
-HTMLHint
-htmltagwrap
-JavaScript Snippet Pack
-Live HTML Previewer
-Markdown Shortcuts
-markdownlint
-Path Intellisense
-View In Browser
-reactjs code snippet
-Auto-Open Markdown Preview
-Markdown Shortcuts
-Git History(git log)
-Git Lens
-
-
-
 # 1.2 자바스크립트를 이용한 서버 사이드 처리 - Node.js
 ### 1.2.1 3분만에 살펴보는 Node.js
 * Node.js의 장점 & 특징
@@ -157,7 +131,8 @@ Git Lens
 ----
 
 # 1.6 Node.js로 간단한 웹 애플리케이션 만들기
-
+* node.js 표준 API만 사용해 웹서버 개발
+* 
 
 
 
