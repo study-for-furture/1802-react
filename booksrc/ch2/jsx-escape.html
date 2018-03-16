@@ -6,8 +6,10 @@
 </head><body>
   <div id="root"></div>
   <script type="text/babel">
-    const value = "<<< 모든 국가는 그에 걸맞은 정부를 가진다 >>>"
+    const value = "<b>ok</b><<< 모든 국가는 그에 걸맞은 정부를 가진다 >>>"
     const elem = <h2>{value}</h2>
+    console.log(elem)
+    console.log(value)
     const root = document.getElementById('root')
     ReactDOM.render(elem, root)
   </script>
