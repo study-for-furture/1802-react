@@ -427,11 +427,164 @@
 ----
 
 ## 2.5 본격적으로 컴포넌트 만들기
+### 2.5.1 컴포넌트의 상태 관리하기
+* 컴포넌트의 상태를 관리하기 위해 state 객체를 사용한다.
+* state
+	* 한번 값 설정 이후는 setState() 메소드를 사용해서 값을 변경해야 한다.
+----
 
+### 2.5.2 시계 컴포넌트 만들기
+* 시계 컴포넌트 개발
+	* 1초에 1번씩 상태가 변화하는 컴포넌트
+	* P129 st-clock.html
+	* 프로그램 구조
+		* class를 사용해 상태를 가진 컴포넌트를 정의
+		* 컴포넌트의 상태를 초기화 - 생성자
+		* setInterval 내부에서 setState() 메소드 사용
+----
+
+## 2.6 이벤트의 구조와 구현
+### 2.6.1 리액트로 클릭 이벤트를 구현하는 방법
+* 리액트는 onClick 이벤트를 지정한다.
+	* 그리고 onClick에 함수 객체를 중괄호로 감싸서 지정한다.
+	```XML
+	// javascript
+	<div onclick="clickHandler(e)"><Click Me</div>>
+
+	// react
+	<div onClick={clickHandler}>Click Me</div>
+	```
+---
+
+* P133 st-click.html
+	* 레이블을 클릭하면 "안녕하세요"를 경고창에 출력하는 프로그램
+	* onClick 속성으로 클릭 이벤트 지정
+	* 이벤트에 화살표 함수를 지정
+
+* 클릭했을 때 클래스의 메소드 호출하기
+	* 클릭 이벤트로 클래스의 메소드를 호출하고 싶을 때
+	* onClick에 메소드를 지정하면 호출될 때 this가 undefined가 됨
+	* 미리 clickHandler에 this를 바인드해야 this를 인식시킬 수 있음
+	* P134 st-click2.html
+		* 생성자에서 this를 바인딩 처리
+----
+
+### 2.6.2 간단한 체크박스 구현하기
+* P135 - st-checkbox.html
+	* 체크박스를 텍스트만으로 표현하는 CBox 컴포넌트를 정의
+	* 생성자에서 checked 프로퍼티를 정의
+	* 화살표함수를 사용해 함수 객체를 정의하면 함수 내부의 this가 변경되지 않는다.
+----
+
+### 2.6.3 리액트로 이벤트를 만드는 방법
+* (1) render() 메소드 내부에서 이벤트 핸들러 정의하기
+	* 가장 쉬운 방법
+* (2) 클래스의 메소드로 정의하고, this 바인드하기
+	* 이벤트 핸들러가 여러 줄일때 클래스의 메소드로 빼서 정의하고 this를 바인딩처리
+* (3) 클래스 메소드로 정의하고, 화살표 함수로 호출하기
+	* 복잡한 코드를 화살표 함수로 리팩토링
+	* this를 바인딩하지 않아도 됨
+---
+
+## 2.7 리액트 도구를 사용한 자동 빌드
+* 페이지 출력시간의 단축을 위해 소스코드를 컴파일해서 사용하는 것이 일반적
+### 2.7.1 리액트/JSX 컴파일 환경 만들기
+* 리액트/JSX를 사용하는 경우에는 컴파일 환경을 구축하고, 미리 리액트/JSX 소스코드를 컴파일함
+---
+
+### 2.7.2 create-react-app 설치
+* create-react-app 애플리케이션을 사용해서 컴파일 환경 구축한다.
+	* 페이스북에서 제공하는 애플리케이션
+	```BASH
+	$ npm install -g create-react-app
+	```
+	> create-react-app 설치
+* create-react-app 으로 hello 프로젝트 만들기
+	```BASH
+	$ create-react-app hello
+	$ cd hello
+	$ npm start
+	```
+---
+
+* 프로그램 작성하기
+	* 폴더구조
+		* node_modules
+		* src
+			* 컴파일 이전의 소스
+		* public
+	* 프로그램 수정 
+		* P142 App.js
+----
+
+* 오류가 있으면 알기 쉽게 출력해줘요!
+* 프로그램 공개하기
+	* $ npm run build
+		> 공개 전용 파일을 생성한다.
+		> build라는 디렉터리가 생성
+* 확인은 serve로 확인
+	* $ npm install -g serve
+	* serve -s build
+----
+
+### 2.7.3 기본 애플리케이션 구조 확인하기
+* App.js를 살펴봅시다.
+	* src 디렉토리에 HTML 파일이 하나도 없다.
+	* public 디렉토리의 index.html을 읽어들임
+----
+
+## 2.8 웹팩으로 리소스 파일 변환하기
+### 2.8.1 웹팩이란?
+* 자바스크립트 또는 CSS 등의 리소스 파일을 하나로 합쳐주거나, JSX처럼 특수한 기법으로 작성된 파일을 변환하는 도구
+----
+
+* 웹팩 설치
+	```BASH
+	$ npm install -g webpack
+	```
+
+* 자바스크립트 모듈 구성을 웹팩으로 해결하기
+	* 두개의 js를 하나로 합치때 사용
+	```BASH
+	$ mkdir out
+	$ webpack main.js out/test.js
+	```
+	> 웹팩이 필요한 모듈을 확인하고 결합해서 하나의 자바스크립트로 만들어 준다.
+----
+
+* 변환 설정 파일 만들기
+	* webpack.config.js라는 설정 파일을 만든다.
+	```JAVASCRIPT
+	module.exports = {
+		entry: './main.js',
+		output: {
+			filename: 'out/test.js'
+		}
+	};
+	```
+	> webpack.config.js 파일로 저장하면 명령줄에 webpack만 입력해서 변환 작업을 할 수 있다.
+	* 설정 파일을 다른 이름으로 저장했을 경우는 --config 옵션으로 설정파일 지정
+	> webpack --config webpack.config.js
+----
+
+### 2.8.2 웹팩으로 리액트/JSX 빌드하기
+```BASH
+$ mkdir src out
+$ npm init --force
+$ npm i --save-dev webpack
+$ npm i --save-dev react react-dom
+$ npm i --save-dev babel-loader babel-core
+$ npm i --save-dev babel-preset-es2015 babel-preset-react
+# webpack.config.js 작성 - P151
+# 확장자가 .js로 끝나는 모든 파일을 babel-loader를 사용해서 변환함
+```
+
+# 3 리액트 컴포넌트 만들기
+# 3.1 컴포넌트의 라이프사이클
+# 3.1.1 컴포넌트의 라이프사이클
 
 
 ----
-
 # 6.1 누구나 편집할 수 있는 위키 시스템 만들기
 * 공동 편집기능을 가지는 위키 시스템 만들기
 * DB로 NeDB, 파서 제너레이터로 PEG.js를 사용할 예정
